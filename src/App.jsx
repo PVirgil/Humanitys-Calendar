@@ -306,7 +306,7 @@ function App() {
         <button className="brand" onClick={reset} aria-label="Reset timeline">
           <span className="brand-mark"><Globe2 size={19} /></span>
           <span>
-            <strong>CONTINUUM</strong>
+            <strong>Humanity's Calendar</strong>
             <small>THE HUMAN RECORD</small>
           </span>
         </button>
