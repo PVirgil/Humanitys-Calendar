@@ -401,13 +401,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .event-node.above .event-label {
-  bottom: calc(100% + 22px);
-  min-height: 30px;
+  bottom: calc(100% + 2px);
 }
 
 .event-node.below .event-label {
-  top: calc(100% + 22px);
-  min-height: 30px;
+  top: calc(100% + 2px);
 }
 
 .event-label strong,
@@ -425,21 +423,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   color: var(--accent);
   font-family: "DM Mono", monospace;
   font-size: 8px;
+  margin-top: 4px;
   white-space: nowrap;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  margin: 0;
-}
-
-/* Dates stay at one consistent height from every circle, regardless of title length. */
-.event-node.above .event-label small {
-  bottom: -18px;
-}
-
-.event-node.below .event-label small {
-  top: -18px;
 }
 
 .timeline-hint {
@@ -754,7 +739,7 @@ kbd {
     --level-step: 58px;
   }
   .event-label {
-    width: 102px;
+    width: 88px;
   }
   .event-label strong {
     font-size: 8px;
@@ -762,7 +747,7 @@ kbd {
   }
   .event-label small {
     font-size: 7px;
-    margin: 0;
+    margin-top: 3px;
   }
   .event-label strong { font-size: 9px; }
   .timeline-hint { display: none; }
@@ -771,4 +756,10 @@ kbd {
   .zoom-readout { width: 67px; }
   .minimap { width: calc(100% - 30px); }
   .drawer-content { padding-inline: 22px; }
+}
+
+@media (max-width: 390px) {
+  .tick:nth-of-type(even) label {
+    display: none;
+  }
 }
