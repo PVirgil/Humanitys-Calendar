@@ -101,24 +101,27 @@ function categoryIcon(category) {
   return map[category] || "•";
 }
 
-function TimelineEvent({ event, left, lane, visible, selected, onSelect }) {
-  const size = clamp(12 + (event.significance - 75) * 0.75, 12, 34);
+function TimelineEvent({ event, left, side, visible, selected, onSelect }) {
   if (!visible) return null;
 
   return (
     <button
-      className={`event-node ${selected ? "selected" : ""}`}
-      style={{
-        left: `${left}%`,
-        "--lane": lane,
-        "--node-size": `${size}px`,
+      type="button"
+      className={`event-node ${side} ${selected ? "selected" : ""}`}
+      style={{ left: `${left}%` }}
+      onPointerDown={(event) => event.stopPropagation()}
+      onPointerUp={(pointerEvent) => {
+        pointerEvent.stopPropagation();
+        onSelect(event);
       }}
-      onClick={() => onSelect(event)}
-      aria-label={`${event.title}, ${formatYear(event.year)}`}
+      onClick={(event) => event.stopPropagation()}
+      aria-label={`Open full details for ${event.title}, ${formatYear(event.year)}`}
     >
-      <span className="event-stem" />
-      <span className="event-dot">
-        <span>{categoryIcon(event.category)}</span>
+      <span className="event-connector" aria-hidden="true" />
+      <span className="event-hit-area">
+        <span className="event-dot" aria-hidden="true">
+          <span className="event-icon">{categoryIcon(event.category)}</span>
+        </span>
       </span>
       <span className="event-label">
         <strong>{event.title}</strong>
@@ -409,13 +412,13 @@ function App() {
             event.significance >= significanceFloor ||
             Boolean(query) ||
             category !== "All";
-          const lane = index % 5;
+          const side = index % 2 === 0 ? "above" : "below";
           return (
             <TimelineEvent
               key={event.id}
               event={event}
               left={left}
-              lane={lane}
+              side={side}
               visible={eventVisible}
               selected={selected?.id === event.id}
               onSelect={setSelected}
