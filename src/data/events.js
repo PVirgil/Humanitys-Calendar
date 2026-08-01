@@ -182,6 +182,32 @@ export const events = [
     tags: ["Rome", "empire", "Mediterranean"],
   },
   {
+  id: "birth-of-jesus",
+  year: -4,
+  title: "Birth of Jesus Christ",
+  summary: "Jesus of Nazareth is born in Judea.",
+  description:
+    "Jesus of Nazareth, God's only begotten son & God incarnate as man, was born in Judea by the Virgin Mary during the reign of Herod the Great. His life and teachings became the foundation of Christianity and the salvation of humanity, which grew into the world's largest and most influential religion.",
+  category: "Religion",
+  significance: 100,
+  location: "Bethlehem, Judea",
+  people: ["Jesus Christ", "Mary", "Joseph"],
+  tags: ["Christianity", "Jesus", "Bethlehem", "religion"],
+},
+{
+  id: "resurrection-of-jesus",
+  year: 30,
+  title: "Resurrection of Jesus Christ",
+  summary: "Christians believe Jesus rises from the dead following his crucifixion.",
+  description:
+    "According to the New Testament, Jesus Christ rose from the dead on the third day after his crucifixion in Jerusalem. The Resurrection resulted in the defeat of death and salvation of humanity becoming foundational to the rapid development and spread of Christianity.",
+  category: "Religion",
+  significance: 100,
+  location: "Jerusalem, Judea",
+  people: ["Jesus Christ"],
+  tags: ["Christianity", "Jesus", "Resurrection", "Easter", "religion"],
+},
+  {
     id: "paper",
     year: 105,
     title: "Papermaking refined in China",
