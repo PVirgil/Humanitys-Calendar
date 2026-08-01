@@ -46,6 +46,13 @@ function inverseSignedLog(value) {
   return sign * (10 ** Math.abs(value) - 1);
 }
 
+function mobileAdjustedSpan(span) {
+  if (typeof window !== "undefined" && window.innerWidth <= 560) {
+    return Math.max(MIN_SPAN, span * 0.55);
+  }
+  return span;
+}
+
 function yearToWorld(year) {
   const min = signedLog(MIN_YEAR);
   const max = signedLog(MAX_YEAR);
@@ -133,7 +140,7 @@ function TimelineEvent({ event, left, side, level, visible, selected, onSelect }
 
 function App() {
   const timelineRef = useRef(null);
-  const [view, setView] = useState({ center: 1950, span: 260 });
+  const [view, setView] = useState({ center: 1950, span: mobileAdjustedSpan(260) });
   const [selected, setSelected] = useState(null);
   const [category, setCategory] = useState("All");
   const [query, setQuery] = useState("");
@@ -220,7 +227,7 @@ function App() {
   };
 
   const reset = () => {
-    setView({ center: 1950, span: 260 });
+    setView({ center: 1950, span: mobileAdjustedSpan(260) });
     setCategory("All");
     setQuery("");
     setSelected(null);
@@ -457,7 +464,7 @@ function App() {
           <ChevronRight size={19} />
         </button>
         <div className="dock-divider" />
-        <button onClick={() => jumpTo(2026, 100)} title="Jump to today">
+        <button onClick={() => jumpTo(2026, mobileAdjustedSpan(100))} title="Jump to today">
           <CalendarDays size={18} />
         </button>
         <button onClick={reset} title="Reset view">
