@@ -401,11 +401,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .event-node.above .event-label {
-  bottom: calc(100% + 2px);
+  bottom: calc(100% + 22px);
+  min-height: 30px;
 }
 
 .event-node.below .event-label {
-  top: calc(100% + 2px);
+  top: calc(100% + 22px);
+  min-height: 30px;
 }
 
 .event-label strong,
@@ -423,8 +425,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
   color: var(--accent);
   font-family: "DM Mono", monospace;
   font-size: 8px;
-  margin-top: 4px;
   white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  margin: 0;
+}
+
+/* Dates stay at one consistent height from every circle, regardless of title length. */
+.event-node.above .event-label small {
+  bottom: -18px;
+}
+
+.event-node.below .event-label small {
+  top: -18px;
 }
 
 .timeline-hint {
@@ -739,7 +754,7 @@ kbd {
     --level-step: 58px;
   }
   .event-label {
-    width: 88px;
+    width: 102px;
   }
   .event-label strong {
     font-size: 8px;
@@ -747,7 +762,7 @@ kbd {
   }
   .event-label small {
     font-size: 7px;
-    margin-top: 3px;
+    margin: 0;
   }
   .event-label strong { font-size: 9px; }
   .timeline-hint { display: none; }
