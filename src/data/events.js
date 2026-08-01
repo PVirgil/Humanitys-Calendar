@@ -606,7 +606,7 @@ export const events = [
     category: "Science",
     significance: 98,
     location: "Cambridge and London",
-    people: ["Rosalind Franklin", "James Watson", "Francis Crick", "Maurice Wilkins"],
+    people: ["James Watson", "Francis Crick", "Rosalind Franklin", "Maurice Wilkins"],
     tags: ["DNA", "genetics", "biology"],
   },
   {
