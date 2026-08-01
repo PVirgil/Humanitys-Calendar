@@ -46,13 +46,6 @@ function inverseSignedLog(value) {
   return sign * (10 ** Math.abs(value) - 1);
 }
 
-function mobileAdjustedSpan(span) {
-  if (typeof window !== "undefined" && window.innerWidth <= 560) {
-    return Math.max(MIN_SPAN, span * 0.55);
-  }
-  return span;
-}
-
 function yearToWorld(year) {
   const min = signedLog(MIN_YEAR);
   const max = signedLog(MAX_YEAR);
@@ -89,6 +82,19 @@ function formatDate(event) {
     timeZone: "UTC",
   });
   return `${monthDay}, ${formatYear(event.year, true)}`;
+}
+
+function stableEventPlacement(event) {
+  const key = String(event.id || event.title || event.year);
+  let hash = 0;
+  for (let i = 0; i < key.length; i += 1) {
+    hash = ((hash << 5) - hash + key.charCodeAt(i)) | 0;
+  }
+  const value = Math.abs(hash);
+  return {
+    side: value % 2 === 0 ? "above" : "below",
+    level: Math.floor(value / 2) % 3,
+  };
 }
 
 function categoryIcon(category) {
@@ -140,7 +146,7 @@ function TimelineEvent({ event, left, side, level, visible, selected, onSelect }
 
 function App() {
   const timelineRef = useRef(null);
-  const [view, setView] = useState({ center: 1950, span: mobileAdjustedSpan(260) });
+  const [view, setView] = useState({ center: 1950, span: 260 });
   const [selected, setSelected] = useState(null);
   const [category, setCategory] = useState("All");
   const [query, setQuery] = useState("");
@@ -188,7 +194,8 @@ function App() {
   }, [view.span]);
 
   const ticks = useMemo(() => {
-    const target = 10;
+    const target =
+      typeof window !== "undefined" && window.innerWidth <= 560 ? 5 : 10;
     const rough = view.span / target;
     const magnitude = 10 ** Math.floor(Math.log10(Math.max(rough, 1)));
     const normalized = rough / magnitude;
@@ -227,7 +234,7 @@ function App() {
   };
 
   const reset = () => {
-    setView({ center: 1950, span: mobileAdjustedSpan(260) });
+    setView({ center: 1950, span: 260 });
     setCategory("All");
     setQuery("");
     setSelected(null);
@@ -419,8 +426,7 @@ function App() {
             event.significance >= significanceFloor ||
             Boolean(query) ||
             category !== "All";
-          const side = index % 2 === 0 ? "above" : "below";
-          const level = Math.floor(index / 2) % 3;
+          const { side, level } = stableEventPlacement(event);
           return (
             <TimelineEvent
               key={event.id}
@@ -464,7 +470,7 @@ function App() {
           <ChevronRight size={19} />
         </button>
         <div className="dock-divider" />
-        <button onClick={() => jumpTo(2026, mobileAdjustedSpan(100))} title="Jump to today">
+        <button onClick={() => jumpTo(2026, 100)} title="Jump to today">
           <CalendarDays size={18} />
         </button>
         <button onClick={reset} title="Reset view">
