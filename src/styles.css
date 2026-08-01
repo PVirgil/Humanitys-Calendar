@@ -284,31 +284,44 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .event-node {
-  --offset: calc((var(--lane) - 2) * 57px);
+  --circle-size: 32px;
+  --touch-size: 52px;
+  --axis-gap: 58px;
   position: absolute;
-  top: calc(57% + var(--offset));
-  transform: translate(-50%, -50%);
-  background: none;
+  top: 57%;
+  width: var(--touch-size);
+  height: var(--touch-size);
+  background: transparent;
   border: 0;
   padding: 0;
+  margin: 0;
   cursor: pointer;
-  z-index: 4;
+  z-index: 6;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
-.event-stem {
-  position: absolute;
-  left: 50%;
-  width: 1px;
-  height: 85px;
-  background: linear-gradient(rgba(214,255,95,.35), transparent);
-  transform: translateX(-50%);
-  top: 50%;
-  opacity: .45;
+
+.event-node.above {
+  transform: translate(-50%, calc(-50% - var(--axis-gap)));
 }
-.event-node:nth-of-type(even) .event-stem { transform: translate(-50%, -100%); }
+
+.event-node.below {
+  transform: translate(-50%, calc(-50% + var(--axis-gap)));
+}
+
+.event-hit-area {
+  width: var(--touch-size);
+  height: var(--touch-size);
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 3;
+  border-radius: 50%;
+}
 
 .event-dot {
-  width: var(--node-size);
-  height: var(--node-size);
+  width: var(--circle-size);
+  height: var(--circle-size);
   display: grid;
   place-items: center;
   position: relative;
@@ -317,49 +330,96 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background: #151b14;
   border: 1px solid rgba(214,255,95,.65);
   box-shadow: 0 0 0 4px rgba(214,255,95,.05), 0 0 25px rgba(214,255,95,.16);
-  transition: transform .2s, box-shadow .2s, background .2s;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
+
 .event-dot::before {
   content: "";
   position: absolute;
-  inset: -8px;
+  inset: -7px;
   border-radius: 50%;
   border: 1px solid rgba(214,255,95,.08);
+  pointer-events: none;
 }
-.event-dot span { font-size: calc(var(--node-size) * .45); }
-.event-node:hover .event-dot, .event-node.selected .event-dot {
-  transform: scale(1.18);
+
+.event-icon {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  font-size: 14px;
+  text-align: center;
+}
+
+.event-node:hover .event-dot,
+.event-node:focus-visible .event-dot,
+.event-node.selected .event-dot {
+  transform: scale(1.08);
   background: var(--accent);
   color: #0b0d08;
   box-shadow: 0 0 0 7px rgba(214,255,95,.08), 0 0 35px rgba(214,255,95,.35);
+}
+
+.event-node:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+.event-connector {
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: calc(var(--axis-gap) - (var(--touch-size) / 2));
+  transform: translateX(-50%);
+  background: linear-gradient(rgba(214,255,95,.55), rgba(255,255,255,.18));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.event-node.above .event-connector {
+  top: 100%;
+}
+
+.event-node.below .event-connector {
+  bottom: 100%;
 }
 
 .event-label {
   width: 150px;
   position: absolute;
   left: 50%;
-  top: calc(100% + 11px);
   transform: translateX(-50%);
   text-align: center;
   pointer-events: none;
 }
-.event-label strong, .event-label small { display: block; }
+
+.event-node.above .event-label {
+  bottom: calc(100% + 4px);
+}
+
+.event-node.below .event-label {
+  top: calc(100% + 4px);
+}
+
+.event-label strong,
+.event-label small {
+  display: block;
+}
+
 .event-label strong {
   font-size: 10px;
   line-height: 1.25;
   text-shadow: 0 2px 9px #07090d;
 }
+
 .event-label small {
   color: var(--accent);
   font-family: "DM Mono", monospace;
   font-size: 8px;
   margin-top: 4px;
 }
-.event-node:nth-child(3n) .event-label {
-  top: auto;
-  bottom: calc(100% + 11px);
-}
-
 .timeline-hint {
   position: absolute;
   left: 50%;
@@ -664,6 +724,7 @@ kbd {
   .hero-meta h1 { font-size: 25px; }
   .era-jumps { flex-wrap: nowrap; width: calc(100vw - 40px); overflow-x: auto; padding-bottom: 4px; }
   .timeline-stage { height: 390px; }
+  .event-node { --touch-size: 56px; --axis-gap: 60px; }
   .event-label { width: 105px; }
   .event-label strong { font-size: 9px; }
   .timeline-hint { display: none; }
