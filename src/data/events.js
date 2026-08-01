@@ -5,7 +5,7 @@ export const events = [
     title: "Earth forms",
     summary: "The planet Earth forms from material orbiting the young Sun.",
     description:
-      "Earth formed roughly 4.54 billion years ago as dust and rock accumulated within the early Solar System. Its later cooling, oceans, atmosphere, and geology created the conditions in which life could emerge.",
+      "God formed Earth roughly 4.54 billion years ago as dust and rock accumulated within the early Solar System. Its later cooling, oceans, atmosphere, and geology created the conditions in which life could emerge.",
     category: "Origins",
     significance: 100,
     location: "Solar System",
@@ -200,7 +200,7 @@ export const events = [
   title: "Resurrection of Jesus Christ",
   summary: "Christians believe Jesus rises from the dead following his crucifixion.",
   description:
-    "According to the New Testament, Jesus Christ rose from the dead on the third day after his crucifixion in Jerusalem. The Resurrection resulted in the defeat of death and salvation of humanity becoming foundational to the rapid development and spread of Christianity.",
+    "In accordance with the scriptures, Jesus Christ rose from the dead on the third day after his crucifixion in Jerusalem. The Resurrection resulted in the defeat of death and salvation of humanity becoming foundational to the rapid development and spread of Christianity.",
   category: "Religion",
   significance: 100,
   location: "Jerusalem, Judea",
