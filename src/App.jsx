@@ -69,8 +69,8 @@ function formatYear(year, detailed = false) {
   if (rounded < -10_000) {
     return `${Math.abs(Math.round(rounded / 1000))}K years ago`;
   }
-  if (rounded < 0) return `${Math.abs(rounded).toLocaleString()} BCE`;
-  return `${rounded.toLocaleString()} CE`;
+  if (rounded < 0) return `${Math.abs(rounded).toLocaleString()} BC`;
+  return `${rounded.toLocaleString()} AD`;
 }
 
 function formatDate(event) {
