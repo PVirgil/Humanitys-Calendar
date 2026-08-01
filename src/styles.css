@@ -235,7 +235,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .era-jumps button:hover { color: var(--accent); border-color: rgba(214,255,95,.35); }
 
 .timeline-stage {
-  height: 455px;
+  height: 520px;
   position: relative;
   cursor: grab;
   user-select: none;
@@ -256,14 +256,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: absolute;
   left: 0;
   right: 0;
-  top: 57%;
+  top: 50%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.35) 5%, rgba(255,255,255,.35) 95%, transparent);
   box-shadow: 0 0 20px rgba(255,255,255,.04);
 }
 .tick {
   position: absolute;
-  top: calc(57% - 5px);
+  top: calc(50% - 5px);
   height: 28px;
   transform: translateX(-50%);
 }
@@ -290,7 +290,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   --level-step: 46px;
   --marker-distance: calc(var(--base-distance) + (var(--level) * var(--level-step)));
   position: absolute;
-  top: 57%;
+  top: 50%;
   width: var(--touch-size);
   height: var(--touch-size);
   background: transparent;
@@ -724,7 +724,7 @@ kbd {
   .top-actions span { display: none; }
   .hero-meta { align-items: flex-start; flex-direction: column; padding: 23px 20px 15px; }
   .era-jumps { justify-content: flex-start; }
-  .timeline-stage { height: 430px; }
+  .timeline-stage { height: 500px; }
   .filter-panel { padding: 14px 18px; align-items: flex-start; flex-direction: column; gap: 12px; }
 }
 
@@ -732,7 +732,7 @@ kbd {
   .brand small { display: none; }
   .hero-meta h1 { font-size: 25px; }
   .era-jumps { flex-wrap: nowrap; width: calc(100vw - 40px); overflow-x: auto; padding-bottom: 4px; }
-  .timeline-stage { height: 390px; }
+  .timeline-stage { height: 470px; }
   .event-node {
     --touch-size: 56px;
     --base-distance: 28px;
