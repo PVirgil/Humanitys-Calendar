@@ -101,14 +101,14 @@ function categoryIcon(category) {
   return map[category] || "•";
 }
 
-function TimelineEvent({ event, left, side, visible, selected, onSelect }) {
+function TimelineEvent({ event, left, side, level, visible, selected, onSelect }) {
   if (!visible) return null;
 
   return (
     <button
       type="button"
       className={`event-node ${side} ${selected ? "selected" : ""}`}
-      style={{ left: `${left}%` }}
+      style={{ left: `${left}%`, "--level": level }}
       onPointerDown={(event) => event.stopPropagation()}
       onPointerUp={(pointerEvent) => {
         pointerEvent.stopPropagation();
@@ -413,12 +413,14 @@ function App() {
             Boolean(query) ||
             category !== "All";
           const side = index % 2 === 0 ? "above" : "below";
+          const level = Math.floor(index / 2) % 3;
           return (
             <TimelineEvent
               key={event.id}
               event={event}
               left={left}
               side={side}
+              level={level}
               visible={eventVisible}
               selected={selected?.id === event.id}
               onSelect={setSelected}
