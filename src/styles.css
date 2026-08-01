@@ -763,3 +763,9 @@ kbd {
     display: none;
   }
 }
+
+@media (max-width: 560px) {
+  .search-wrap input {
+    caret-color: #fff;
+  }
+}
