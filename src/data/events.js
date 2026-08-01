@@ -200,7 +200,7 @@ export const events = [
   title: "Resurrection of Jesus Christ",
   summary: "Christians believe Jesus rises from the dead following his crucifixion.",
   description:
-    "In accordance with the scriptures, Jesus Christ rose from the dead on the third day after his crucifixion in Jerusalem. The Resurrection resulted in the defeat of death and salvation of humanity becoming foundational to the rapid development and spread of Christianity.",
+    "In accordance with the scriptures, Jesus Christ rose from the dead on the third day after his crucifixion in Jerusalem. The Resurrection resulted in the defeat of death and salvation of humanity, becoming foundational to the rapid development and spread of Christianity.",
   category: "Religion",
   significance: 100,
   location: "Jerusalem, Judea",
