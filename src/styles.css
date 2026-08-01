@@ -286,7 +286,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .event-node {
   --circle-size: 32px;
   --touch-size: 52px;
-  --axis-gap: 58px;
+  --base-distance: 26px;
+  --level-step: 46px;
+  --marker-distance: calc(var(--base-distance) + (var(--level) * var(--level-step)));
   position: absolute;
   top: 57%;
   width: var(--touch-size);
@@ -302,11 +304,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .event-node.above {
-  transform: translate(-50%, calc(-50% - var(--axis-gap)));
+  transform: translate(-50%, calc(-50% - var(--marker-distance)));
 }
 
 .event-node.below {
-  transform: translate(-50%, calc(-50% + var(--axis-gap)));
+  transform: translate(-50%, calc(-50% + var(--marker-distance)));
 }
 
 .event-hit-area {
@@ -371,23 +373,26 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: absolute;
   left: 50%;
   width: 1px;
-  height: calc(var(--axis-gap) - (var(--touch-size) / 2));
+  height: var(--marker-distance);
   transform: translateX(-50%);
-  background: linear-gradient(rgba(214,255,95,.55), rgba(255,255,255,.18));
   pointer-events: none;
   z-index: 1;
 }
 
+/* Top: brighter at the circle, darker toward the timeline. */
 .event-node.above .event-connector {
-  top: 100%;
+  top: 50%;
+  background: linear-gradient(to bottom, rgba(214,255,95,.58), rgba(214,255,95,.10));
 }
 
+/* Bottom: opposite direction — darker at the timeline, brighter toward the circle. */
 .event-node.below .event-connector {
-  bottom: 100%;
+  bottom: 50%;
+  background: linear-gradient(to bottom, rgba(214,255,95,.10), rgba(214,255,95,.58));
 }
 
 .event-label {
-  width: 150px;
+  width: 142px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -396,11 +401,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .event-node.above .event-label {
-  bottom: calc(100% + 4px);
+  bottom: calc(100% + 2px);
 }
 
 .event-node.below .event-label {
-  top: calc(100% + 4px);
+  top: calc(100% + 2px);
 }
 
 .event-label strong,
@@ -410,7 +415,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .event-label strong {
   font-size: 10px;
-  line-height: 1.25;
+  line-height: 1.3;
   text-shadow: 0 2px 9px #07090d;
 }
 
@@ -419,7 +424,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-family: "DM Mono", monospace;
   font-size: 8px;
   margin-top: 4px;
+  white-space: nowrap;
 }
+
 .timeline-hint {
   position: absolute;
   left: 50%;
@@ -439,6 +446,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   gap: 8px;
   color: var(--muted);
   pointer-events: none;
+  transform: translateY(-72px);
+  z-index: 7;
 }
 .empty-state strong { color: #d6dbe3; font-size: 13px; }
 .empty-state span { font-size: 10px; }
@@ -724,8 +733,22 @@ kbd {
   .hero-meta h1 { font-size: 25px; }
   .era-jumps { flex-wrap: nowrap; width: calc(100vw - 40px); overflow-x: auto; padding-bottom: 4px; }
   .timeline-stage { height: 390px; }
-  .event-node { --touch-size: 56px; --axis-gap: 60px; }
-  .event-label { width: 105px; }
+  .event-node {
+    --touch-size: 56px;
+    --base-distance: 28px;
+    --level-step: 58px;
+  }
+  .event-label {
+    width: 88px;
+  }
+  .event-label strong {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+  .event-label small {
+    font-size: 7px;
+    margin-top: 3px;
+  }
   .event-label strong { font-size: 9px; }
   .timeline-hint { display: none; }
   .control-dock { margin-top: 15px; }
