@@ -84,17 +84,20 @@ function formatDate(event) {
   return `${monthDay}, ${formatYear(event.year, true)}`;
 }
 
+const EVENT_PLACEMENT = new Map(
+  [...events]
+    .sort((a, b) => a.year - b.year || String(a.id).localeCompare(String(b.id)))
+    .map((event, index) => [
+      event.id,
+      {
+        side: index % 2 === 0 ? "below" : "above",
+        level: Math.floor(index / 2) % 3,
+      },
+    ]),
+);
+
 function stableEventPlacement(event) {
-  const key = String(event.id || event.title || event.year);
-  let hash = 0;
-  for (let i = 0; i < key.length; i += 1) {
-    hash = ((hash << 5) - hash + key.charCodeAt(i)) | 0;
-  }
-  const value = Math.abs(hash);
-  return {
-    side: value % 2 === 0 ? "above" : "below",
-    level: Math.floor(value / 2) % 3,
-  };
+  return EVENT_PLACEMENT.get(event.id) || { side: "below", level: 0 };
 }
 
 function categoryIcon(category) {
